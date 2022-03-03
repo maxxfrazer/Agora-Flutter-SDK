@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:agora_rtc_engine/src/impl/rtc_engine_impl.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -248,7 +249,7 @@ class _RtcSurfaceViewState extends State<RtcSurfaceView> {
     params['mirrorMode'] = _mirrorMode;
 
     if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
-      RtcEngine.methodChannel.invokeMethod('callApi', {
+      RtcEngineImpl.methodChannel.invokeMethod('callApi', {
         'apiType': _getSetRenderModeApiType(widget.uid).index,
         'params': jsonEncode(params),
       });
@@ -260,7 +261,7 @@ class _RtcSurfaceViewState extends State<RtcSurfaceView> {
   void setRenderMode() {
     _renderMode = VideoRenderModeConverter(widget.renderMode).value();
 
-    RtcEngine.methodChannel.invokeMethod('callApi', {
+    RtcEngineImpl.methodChannel.invokeMethod('callApi', {
       'apiType': _getSetRenderModeApiType(widget.uid).index,
       'params': jsonEncode({
         'userId': widget.uid,
@@ -272,7 +273,7 @@ class _RtcSurfaceViewState extends State<RtcSurfaceView> {
 
   void setMirrorMode() {
     _mirrorMode = VideoMirrorModeConverter(widget.mirrorMode).value();
-    RtcEngine.methodChannel.invokeMethod('callApi', {
+    RtcEngineImpl.methodChannel.invokeMethod('callApi', {
       'apiType': _getSetRenderModeApiType(widget.uid).index,
       'params': jsonEncode({
         'userId': widget.uid,
@@ -487,7 +488,7 @@ class _RtcTextureViewState extends State<RtcTextureView> {
     _mirrorMode = VideoMirrorModeConverter(widget.mirrorMode).value();
     if (widget.useFlutterTexture &&
         defaultTargetPlatform != TargetPlatform.android) {
-      RtcEngine.methodChannel.invokeMethod('createTextureRender', {
+      RtcEngineImpl.methodChannel.invokeMethod('createTextureRender', {
         'subProcess': widget.subProcess,
       }).then((value) {
         setState(() {
@@ -523,7 +524,7 @@ class _RtcTextureViewState extends State<RtcTextureView> {
     _channels.remove(_id);
     if (widget.useFlutterTexture &&
         defaultTargetPlatform != TargetPlatform.android) {
-      RtcEngine.methodChannel.invokeMethod('destroyTextureRender', {
+      RtcEngineImpl.methodChannel.invokeMethod('destroyTextureRender', {
         'id': _id,
         'subProcess': widget.subProcess,
       });
@@ -563,7 +564,7 @@ class _RtcTextureViewState extends State<RtcTextureView> {
     _renderMode = VideoRenderModeConverter(widget.renderMode).value();
     _mirrorMode = VideoMirrorModeConverter(widget.mirrorMode).value();
 
-    RtcEngine.methodChannel.invokeMethod('callApi', {
+    RtcEngineImpl.methodChannel.invokeMethod('callApi', {
       'apiType': _getSetRenderModeApiType(widget.uid).index,
       'params': jsonEncode({
         'userId': widget.uid,
@@ -577,7 +578,7 @@ class _RtcTextureViewState extends State<RtcTextureView> {
     _renderMode = VideoRenderModeConverter(widget.renderMode).value();
     _mirrorMode = VideoMirrorModeConverter(widget.mirrorMode).value();
 
-    RtcEngine.methodChannel.invokeMethod('callApi', {
+    RtcEngineImpl.methodChannel.invokeMethod('callApi', {
       'apiType': _getSetRenderModeApiType(widget.uid).index,
       'params': jsonEncode({
         'userId': widget.uid,
