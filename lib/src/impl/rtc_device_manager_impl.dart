@@ -28,6 +28,8 @@ enum _ApiTypeAudioDeviceManager {
   kADMStopRecordingDeviceTest,
   kADMStartAudioDeviceLoopbackTest,
   kADMStopAudioDeviceLoopbackTest,
+  kADMFollowSystemPlaybackDevice,
+  kADMFollowSystemRecordingDevice,
 }
 
 enum _ApiTypeVideoDeviceManager {
@@ -458,6 +460,28 @@ class RtcDeviceManagerImpl implements RtcDeviceManager {
     return _invokeVideoMethod('callApi', {
       'apiType': _ApiTypeVideoDeviceManager.kVDMGetDevice.index,
       'params': jsonEncode({}),
+    });
+  }
+
+  @override
+  Future<void> followSystemPlaybackDevice(bool enable) {
+    return _invokeVideoMethod('callApi', {
+      'apiType':
+          _ApiTypeAudioDeviceManager.kADMFollowSystemPlaybackDevice.index,
+      'params': jsonEncode({
+        'enable': enable,
+      }),
+    });
+  }
+
+  @override
+  Future<void> followSystemRecordingDevice(bool enable) {
+    return _invokeVideoMethod('callApi', {
+      'apiType':
+          _ApiTypeAudioDeviceManager.kADMFollowSystemRecordingDevice.index,
+      'params': jsonEncode({
+        'enable': enable,
+      }),
     });
   }
 }

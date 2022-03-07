@@ -7,10 +7,12 @@ import 'package:agora_rtc_engine/src/api_types.dart';
 import 'package:agora_rtc_engine/src/classes.dart';
 import 'package:agora_rtc_engine/src/enum_converter.dart';
 import 'package:agora_rtc_engine/src/enums.dart';
-import 'package:agora_rtc_engine/src/events.dart';
+
 import 'package:agora_rtc_engine/src/rtc_channel.dart';
 import 'package:agora_rtc_engine/src/rtc_device_manager.dart';
 import 'package:agora_rtc_engine/src/rtc_engine.dart';
+import 'package:agora_rtc_engine/src/rtc_engine_event_handler.dart';
+import 'rtc_engine_event_handler_impl.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -53,7 +55,7 @@ class RtcEngineImpl implements RtcEngine {
     return _instance!;
   }
 
-@override
+  @override
   Future<RtcEngine> getScreenShareHelper({String? appGroup}) async {
     if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
       throw PlatformException(code: ErrorCode.NotSupported.toString());
@@ -105,7 +107,7 @@ class RtcEngineImpl implements RtcEngine {
     });
   }
 
-@override
+  @override
   Future<String?> getErrorDescription(int error) {
     return RtcEngineImpl.methodChannel.invokeMethod('callApi', {
       'apiType': ApiTypeEngine.kEngineGetErrorDescription.index,
@@ -152,7 +154,6 @@ class RtcEngineImpl implements RtcEngine {
       }),
     });
   }
-
 
   // TODO(littlegnal): Fill test
   @override
@@ -1778,12 +1779,11 @@ class RtcEngineImpl implements RtcEngine {
   }
 
   @override
-  Future<void> setLocalAccessPoint(List<String> ips, String domain) {
+  Future<void> setLocalAccessPoint(LocalAccessPointConfiguration config) {
     return _invokeMethod('callApi', {
       'apiType': ApiTypeEngine.kEngineSetLocalAccessPoint.index,
       'params': jsonEncode({
-        'ips': ips,
-        'domain': domain,
+        'config': config.toJson(),
       }),
     });
   }
@@ -1900,6 +1900,93 @@ class RtcEngineImpl implements RtcEngine {
         'channel': channel,
         'uid': uid,
         'filePath': filePath,
+      }),
+    });
+  }
+
+  @override
+  Future<void> enableWirelessAccelerate(bool enabled) {
+    return _invokeMethod('callApi', {
+      'apiType': ApiTypeEngine.kEngineEnableWirelessAccelerate.index,
+      'params': jsonEncode({
+        'enabled': enabled,
+      }),
+    });
+  }
+
+  @override
+  Future<void> setAVSyncSource(String channelId, int uid) {
+    return _invokeMethod('callApi', {
+      'apiType': ApiTypeEngine.kEngineSetAVSyncSource.index,
+      'params': jsonEncode({
+        'channelId': channelId,
+        'uid': uid,
+      }),
+    });
+  }
+
+  @override
+  Future<void> setColorEnhanceOptions(
+      bool enabled, ColorEnhanceOptions option) {
+    return _invokeMethod('callApi', {
+      'apiType': ApiTypeEngine.kEngineSetColorEnhanceOptions.index,
+      'params': jsonEncode({
+        'enabled': enabled,
+        'option': option.toJson(),
+      }),
+    });
+  }
+
+  @override
+  Future<void> setLowlightEnhanceOptions(
+      bool enabled, LowLightEnhanceOptions option) {
+    return _invokeMethod('callApi', {
+      'apiType': ApiTypeEngine.kEngineSetLowlightEnhanceOptions.index,
+      'params': jsonEncode({
+        'enabled': enabled,
+        'option': option.toJson(),
+      }),
+    });
+  }
+
+  @override
+  Future<void> setVideoDenoiserOptions(
+      bool enabled, VideoDenoiserOptions option) {
+    return _invokeMethod('callApi', {
+      'apiType': ApiTypeEngine.kEngineSetVideoDenoiserOptions.index,
+      'params': jsonEncode({
+        'enabled': enabled,
+        'option': option.toJson(),
+      }),
+    });
+  }
+
+  @override
+  Future<void> startRtmpStreamWithoutTranscoding(String url) {
+    return _invokeMethod('callApi', {
+      'apiType': ApiTypeEngine.kEngineStartRtmpStreamWithoutTranscoding.index,
+      'params': jsonEncode({
+        'url': url,
+      }),
+    });
+  }
+
+  @override
+  Future<void> stopRtmpStream(String url) {
+    return _invokeMethod('callApi', {
+      'apiType': ApiTypeEngine.kEngineStopRtmpStream.index,
+      'params': jsonEncode({
+        'url': url,
+      }),
+    });
+  }
+
+  @override
+  Future<void> updateRtmpTranscoding(LiveTranscoding transcoding) {
+    return _invokeMethod('callApi', {
+      'apiType': ApiTypeEngine.kEngineUpdateRtmpTranscoding.index,
+      'params': jsonEncode({
+        'transcoding': transcoding.toJson(),
       }),
     });
   }

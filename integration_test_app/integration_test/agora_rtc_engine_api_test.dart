@@ -2719,13 +2719,13 @@ void main() {
     await fakeIrisEngine.initialize();
 
     rtcEngine = await _createEngine();
-    await rtcEngine.setLocalAccessPoint(['127.0.0.1'], 'example.com');
+    const config = LocalAccessPointConfiguration();
+    await rtcEngine.setLocalAccessPoint(config);
 
     fakeIrisEngine.expectCalledApi(
       ApiTypeEngine.kEngineSetLocalAccessPoint.index,
       jsonEncode({
-        'ips': ['127.0.0.1'],
-        'domain': 'example.com',
+        'config': config.toJson(),
       }),
     );
   });

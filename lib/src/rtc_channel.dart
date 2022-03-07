@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'classes.dart';
 import 'enum_converter.dart';
 import 'enums.dart';
-import 'events.dart';
+import 'rtc_channel_event_handler.dart';
 import 'api_types.dart';
 
 ///
@@ -758,4 +758,14 @@ abstract class RtcChannel {
   /// Param [message] The message to be sent.
   ///
   Future<void> sendStreamMessage(int streamId, Uint8List message);
+
+  Future<void> setAVSyncSource(String channelId, int uid);
+
+  Future<void> startRtmpStreamWithoutTranscoding(String url);
+
+  Future<void> startRtmpStreamWithTranscoding(LiveTranscoding transcoding);
+
+  Future<void> updateRtmpTranscoding(LiveTranscoding transcoding);
+
+  Future<void> stopRtmpStream(String url);
 }

@@ -233,4 +233,8 @@ abstract class RtcDeviceManager {
   /// **return** The video capture device.
   ///
   Future<String?> getVideoDevice();
+
+  Future<void> followSystemPlaybackDevice(bool enable);
+
+  Future<void> followSystemRecordingDevice(bool enable);
 }

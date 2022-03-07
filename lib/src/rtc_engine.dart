@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:agora_rtc_engine/src/impl/rtc_engine_impl.dart';
+import 'package:agora_rtc_engine/src/rtc_engine_event_handler.dart';
 
 import 'package:meta/meta.dart';
 
 import 'classes.dart';
 import 'enums.dart';
-import 'events.dart';
 import 'rtc_device_manager.dart';
 
 ///
@@ -400,7 +400,7 @@ abstract class RtcEngine {
   Future<String?> uploadLogFile();
 
   /* api-engine-setLocalAccessPoint */
-  Future<void> setLocalAccessPoint(List<String> ips, String domain);
+  Future<void> setLocalAccessPoint(LocalAccessPointConfiguration config);
 
   ///
   /// Enables/Disables the virtual background. (beta feature)
@@ -2484,8 +2484,24 @@ abstract class RtcEngine {
   ///
   /// Param [bitrate] The bitrate of the screen share.
   ///
-  // TODO(littlegnal): [MS-99459] Doc breack change captureFreq type int? -> int, bitrate type
-  // int? -> int
   Future<void> startScreenCapture(int windowId,
       [int captureFreq, Rect? rect, int bitrate]);
+
+  Future<void> setAVSyncSource(String channelId, int uid);
+
+  Future<void> startRtmpStreamWithoutTranscoding(String url);
+
+  Future<void> updateRtmpTranscoding(LiveTranscoding transcoding);
+
+  Future<void> stopRtmpStream(String url);
+
+  Future<void> setLowlightEnhanceOptions(
+      bool enabled, LowLightEnhanceOptions option);
+
+  Future<void> setVideoDenoiserOptions(
+      bool enabled, VideoDenoiserOptions option);
+
+  Future<void> setColorEnhanceOptions(bool enabled, ColorEnhanceOptions option);
+
+  Future<void> enableWirelessAccelerate(bool enabled);
 }
