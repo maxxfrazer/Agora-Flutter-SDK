@@ -237,8 +237,7 @@ LiveTranscoding _$LiveTranscodingFromJson(Map<String, dynamic> json) =>
           _$AudioCodecProfileTypeEnumMap, json['audioCodecProfile']),
       videoCodecProfile: $enumDecodeNullable(
           _$VideoCodecProfileTypeEnumMap, json['videoCodecProfile']),
-      backgroundColor:
-          _$ColorFromJson(json['backgroundColor'] as Map<String, dynamic>),
+      backgroundColor: json['backgroundColor'] as int?,
       videoCodecType: $enumDecodeNullable(
           _$VideoCodecTypeForStreamEnumMap, json['videoCodecType']),
       userConfigExtraInfo: json['userConfigExtraInfo'] as String?,
@@ -272,7 +271,7 @@ Map<String, dynamic> _$LiveTranscodingToJson(LiveTranscoding instance) {
       _$AudioCodecProfileTypeEnumMap[instance.audioCodecProfile]);
   writeNotNull('videoCodecProfile',
       _$VideoCodecProfileTypeEnumMap[instance.videoCodecProfile]);
-  writeNotNull('backgroundColor', _$ColorToJson(instance.backgroundColor));
+  writeNotNull('backgroundColor', instance.backgroundColor);
   writeNotNull('videoCodecType',
       _$VideoCodecTypeForStreamEnumMap[instance.videoCodecType]);
   writeNotNull('userConfigExtraInfo', instance.userConfigExtraInfo);

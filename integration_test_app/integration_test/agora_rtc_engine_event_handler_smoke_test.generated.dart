@@ -2348,6 +2348,7 @@ void rtcEngineEventHandlerSomkeTestCases() {
       rtcEngine.destroy();
       fakeIrisEngine.dispose();
     },
+    skip: !(Platform.isWindows),
   );
 
   testWidgets(

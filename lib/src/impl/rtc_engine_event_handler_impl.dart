@@ -12,14 +12,12 @@ import 'event_handler_json.dart';
 extension RtcEngineEventHandlerExt on RtcEngineEventHandler {
   void process(String methodName, dynamic data, [Uint8List? buffer]) {
     List<dynamic> newData;
-    // if (kIsWeb || (Platform.isWindows || Platform.isMacOS)) {
-
-    // } else {
-    //   newData = List<dynamic>.from(data);
-    // }
+    
     if (methodName.startsWith('on')) {
       methodName = methodName.substring(2);
     }
+
+    print('methodName: $methodName, data: $data');
 
     final dataMap = jsonDecode(data as String);
 
@@ -81,7 +79,7 @@ extension RtcEngineEventHandlerExt on RtcEngineEventHandler {
         requestToken?.call();
         break;
       case 'AudioVolumeIndication':
-        final list = List<Map>.from(newData[0]);
+        final list = List<Map>.from(newData[0] ?? []);
         var totalVolume;
         // if (kIsWeb || (Platform.isWindows || Platform.isMacOS)) {
 
@@ -465,6 +463,10 @@ extension RtcEngineEventHandlerExt on RtcEngineEventHandler {
         // Internal used, do nothing
         break;
       case 'ScreenCaptureInfoUpdated':
+        if (screenCaptureInfoUpdated != null) {
+          final json = ScreenCaptureInfoJson.fromJson(dataMap);
+          screenCaptureInfoUpdated!(json.info);
+        }
         break;
       case 'ClientRoleChangeFailed':
         if (clientRoleChangeFailed != null) {

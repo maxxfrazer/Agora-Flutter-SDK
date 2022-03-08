@@ -865,7 +865,7 @@ class RtcEngineImpl implements RtcEngine {
     return _invokeMethod('callApi', {
       'apiType': ApiTypeEngine.kEngineGetCameraMaxZoomFactor.index,
       'params': jsonEncode({}),
-    });
+    }).then((value) => double.tryParse(value) ?? 0.0);
   }
 
   @override
