@@ -1211,13 +1211,18 @@ class RtcEngineEventHandler {
   SnapshotTakenCallback? snapshotTaken;
 
   OnScreenCaptureInfoUpdated? screenCaptureInfoUpdated;
+
   OnClientRoleChangeFailed? clientRoleChangeFailed;
+
   OnWlAccMessage? wlAccMessage;
+
   OnWlAccStats? wlAccStats;
+
   OnProxyConnected? proxyConnected;
+
   OnAudioDeviceTestVolumeIndication? audioDeviceTestVolumeIndication;
 
-  /// Constructs a [RtcEngineEventHandler]
+  /// @nodoc
   RtcEngineEventHandler({
     this.warning,
     this.error,
