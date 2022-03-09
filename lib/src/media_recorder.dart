@@ -6,8 +6,8 @@ typedef OnRecorderStateChanged = void Function(
 
 typedef OnRecorderInfoUpdated = void Function(RecorderInfo info);
 
-class MediaRecorderCallback {
-  MediaRecorderCallback({
+class MediaRecorderObserver {
+  MediaRecorderObserver({
     this.onRecorderStateChanged,
     this.onRecorderInfoUpdated,
   });
@@ -62,7 +62,7 @@ abstract class MediaRecorder {
   /// The AgoraMediaRecorder object.
   MediaRecorder getMediaRecorder(
     RtcEngine engine,
-    MediaRecorderCallback callback,
+    MediaRecorderObserver callback,
   );
 
   /// Starts recording the local audio and video.
@@ -120,5 +120,5 @@ abstract class MediaRecorder {
   /// This method releases the RtcEngine object and all other resources used by the
   /// AgoraMediaRecorder object. After calling this method, if you want to enable
   /// the recording again, you must call getMediaRecorder to get the AgoraMediaRecorder object.
-  Future<void> release();
+  Future<void> releaseRecorder();
 }
