@@ -1,6 +1,5 @@
 import 'package:agora_rtc_engine/src/event_types.dart';
 
-
 ///
 /// The SDK uses RtcChannelEventHandler to send RtcChannel event notifications to your app.
 ///

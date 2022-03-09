@@ -202,5 +202,3 @@ typedef OnProxyConnected = void Function(String channel, int uid,
 
 typedef OnAudioDeviceTestVolumeIndication = void Function(
     AudioDeviceTestVolumeType volumeType, int volume);
-
-    

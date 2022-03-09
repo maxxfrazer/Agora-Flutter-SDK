@@ -2493,12 +2493,11 @@ enum RtmpStreamingErrorCode {
   @JsonValue(11)
   NotBroadcaster,
 
-  /**
-   * 13: The `updateRtmpTranscoding` or `setLiveTranscoding` method is called to update the transcoding configuration in a scenario where there is streaming without transcoding.
-   * Check your application code logic.
-   *
-   * @since v3.6.0
-   */
+  /// 13: The `updateRtmpTranscoding` or `setLiveTranscoding` method is called to update the transcoding configuration in a scenario where there is streaming without transcoding.
+  /// Check your application code logic.
+  ///
+  /// @since v3.6.0
+  ///
   @JsonValue(13)
   TranscodingNoMixStream,
 
