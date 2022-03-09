@@ -2948,7 +2948,7 @@ void rtcEngineSubProcessSmokeTestCases() {
           await rtcEngine.getScreenShareHelper(appGroup: 'io.agora');
 
       const bool defaultToSpeaker = true;
-      await screenShareHelper.setDefaultAudioRoutetoSpeakerphone(
+      await screenShareHelper.setDefaultAudioRouteToSpeakerphone(
         defaultToSpeaker,
       );
 

@@ -1828,7 +1828,7 @@ void main() {
 
       rtcEngine = await _createEngine();
 
-      await rtcEngine.setDefaultAudioRoutetoSpeakerphone(true);
+      await rtcEngine.setDefaultAudioRouteToSpeakerphone(true);
 
       fakeIrisEngine.expectCalledApi(
         ApiTypeEngine.kEngineSetDefaultAudioRouteToSpeakerPhone.index,

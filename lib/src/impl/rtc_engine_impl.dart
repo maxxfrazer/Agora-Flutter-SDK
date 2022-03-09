@@ -1149,7 +1149,7 @@ class RtcEngineImpl implements RtcEngine {
   }
 
   @override
-  Future<void> setDefaultAudioRoutetoSpeakerphone(bool defaultToSpeaker) {
+  Future<void> setDefaultAudioRouteToSpeakerphone(bool defaultToSpeaker) {
     return _invokeMethod('callApi', {
       'apiType': ApiTypeEngine.kEngineSetDefaultAudioRouteToSpeakerPhone.index,
       'params': jsonEncode({

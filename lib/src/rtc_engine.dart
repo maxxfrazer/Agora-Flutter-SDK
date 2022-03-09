@@ -1728,7 +1728,7 @@ abstract class RtcEngine {
   ///
   ///
   ///
-  Future<void> setDefaultAudioRoutetoSpeakerphone(bool defaultToSpeaker);
+  Future<void> setDefaultAudioRouteToSpeakerphone(bool defaultToSpeaker);
 
   ///
   /// Enables/Disables the audio playback route to the speakerphone.
