@@ -46,7 +46,7 @@ class MediaRecorderCallback {
   OnRecorderInfoUpdated? onRecorderInfoUpdated;
 }
 
-abstract class AgoraMediaRecorder {
+abstract class MediaRecorder {
   /// Gets the AgoraMediaRecorder object.
   ///
   /// Note
@@ -60,7 +60,7 @@ abstract class AgoraMediaRecorder {
   /// Returns
   ///
   /// The AgoraMediaRecorder object.
-  AgoraMediaRecorder getMediaRecorder(
+  MediaRecorder getMediaRecorder(
     RtcEngine engine,
     MediaRecorderCallback callback,
   );

@@ -11,32 +11,31 @@ import 'rtc_channel_event_handler.dart';
 /// Provides methods that enable real-time communications in an RtcChannel channel.
 /// Call create to create an RtcChannel object.
 ///
-
 abstract class RtcChannel {
   /// The ID of RtcChannel
   String get channelId;
-  
-    ///
+
+  ///
   /// Creates and gets an RtcChannel object.
   /// You can call this method multiple times to create multiple RtcChannel objects,
   /// and then call the joinChannel methods of each RtcChannel to join multiple channels at the same time.
   /// After joining multiple channels, you can simultaneously subscribe to the the audio and video streams of all the channels, but publish a stream in only one channel at one time.
   ///
-  /// Param [channelId] 
+  /// Param [channelId]
   /// The channel name. This parameter signifies the channel in which users engage in real-time audio and video interaction. Under the premise of the same App ID, users who fill in the same channel ID enter the same channel for audio and video interaction. The string length must be less than 64 bytes. Supported characters:
   /// The 26 lowercase English letters: a to z.
   /// The 26 uppercase English letters: A to Z.
   /// The 10 numeric characters: 0 to 9.
   /// Space
   /// "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
-  ///  
-  ///   
-  ///  
+  ///
+  ///
+  ///
   /// The parameter does not have a default value. You must set it.
   /// Do not set this parameter as the empty string "". Otherwise, the SDK returns ERR_REFUSED(5).
-  ///  
-  /// 
-  ///   
+  ///
+  ///
+  ///
   ///
   /// **return** A pointer to the RtcChannel instance, if the method call succeeds.
   /// If the call fails, returns NULL.
@@ -59,7 +58,7 @@ abstract class RtcChannel {
     RtcChannelImpl.destroyAll();
   }
 
-    ///
+  ///
   /// Sets the event handler for the RtcChannel object.
   /// After setting the channel event handler, you can listen for channel events and receive the statistics of the corresponding RtcChannel object.
   ///

@@ -2346,9 +2346,9 @@ class Metadata {
 @JsonSerializable(explicitToJson: true)
 class MediaRecorderConfiguration {
   String storagePath;
-  AgoraMediaRecorderContainerFormat containerFormat; 
+  AgoraMediaRecorderContainerFormat containerFormat;
   AgoraMediaRecorderStreamType streamType;
-  int maxDurationMs; 
+  int maxDurationMs;
   int recorderInfoUpdateInterval;
 
   /// Constructs a [MediaRecorderConfiguration]
