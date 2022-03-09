@@ -134,6 +134,7 @@ class SimpleComment {
 
 class BaseNode {
   late SimpleComment comment;
+  late String source;
 }
 
 class Method extends BaseNode {
@@ -141,7 +142,6 @@ class Method extends BaseNode {
   late FunctionBody body;
   List<Parameter> parameters = [];
   late Type returnType;
-  late String source;
 }
 
 class Field extends BaseNode {
@@ -204,7 +204,8 @@ class DefaultVisitor extends dart_ast_visitor.RecursiveAstVisitor<Object?> {
 
       Field field = Field()
         ..name = fieldName
-        ..comment = _generateComment(node);
+        ..comment = _generateComment(node)
+        ..source = node.toString();
 
       // if (node.parent is dart_ast.ClassDeclaration) {
       //   final fieldList = classFieldsMap.putIfAbsent(
