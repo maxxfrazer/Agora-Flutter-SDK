@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:agora_rtc_engine/src/api_types.dart';
+import 'package:agora_rtc_engine/src/impl/api_types.dart';
 import 'package:agora_rtc_engine/src/classes.dart';
-import 'package:agora_rtc_engine/src/enum_converter.dart';
+import 'enum_converter.dart';
 import 'package:agora_rtc_engine/src/enums.dart';
 
 import 'package:agora_rtc_engine/src/rtc_channel.dart';

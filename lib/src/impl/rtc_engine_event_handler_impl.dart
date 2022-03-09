@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:agora_rtc_engine/src/classes.dart';
-import 'package:agora_rtc_engine/src/enum_converter.dart';
+import 'enum_converter.dart';
 import 'package:agora_rtc_engine/src/rtc_engine_event_handler.dart';
 
 import 'event_handler_json.dart';

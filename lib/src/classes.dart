@@ -1,11 +1,10 @@
 import 'dart:typed_data';
 import 'dart:ui' show Color;
 
-import 'package:agora_rtc_engine/src/enum_converter.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'rtc_channel_event_handler.dart';
 
 import 'enums.dart';
+import 'impl/enum_converter.dart';
 
 part 'classes.g.dart';
 
@@ -2347,10 +2346,10 @@ class Metadata {
 @JsonSerializable(explicitToJson: true)
 class MediaRecorderConfiguration {
   String storagePath;
-  AgoraMediaRecorderContainerFormat containerFormat; // = CONTAINER_MP4;
-  AgoraMediaRecorderStreamType streamType; // = STREAM_TYPE_BOTH;
-  int maxDurationMs; // = 120000;
-  int recorderInfoUpdateInterval; // = 0;
+  AgoraMediaRecorderContainerFormat containerFormat; 
+  AgoraMediaRecorderStreamType streamType;
+  int maxDurationMs; 
+  int recorderInfoUpdateInterval;
 
   /// Constructs a [MediaRecorderConfiguration]
   MediaRecorderConfiguration(
