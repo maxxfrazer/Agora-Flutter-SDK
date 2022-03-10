@@ -106,3 +106,28 @@ class OnAudioDeviceTestVolumeIndicationJson {
   Map<String, dynamic> toJson() =>
       _$OnAudioDeviceTestVolumeIndicationJsonToJson(this);
 }
+
+@JsonSerializable()
+class OnRecorderStateChangedJson {
+  final RecorderState state;
+  final RecorderErrorCode error;
+
+  const OnRecorderStateChangedJson(this.state, this.error);
+
+  factory OnRecorderStateChangedJson.fromJson(Map<String, dynamic> json) =>
+      _$OnRecorderStateChangedJsonFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OnRecorderStateChangedJsonToJson(this);
+}
+
+@JsonSerializable()
+class OnRecorderInfoUpdatedJson {
+  final RecorderInfo info;
+
+  const OnRecorderInfoUpdatedJson(this.info);
+
+  factory OnRecorderInfoUpdatedJson.fromJson(Map<String, dynamic> json) =>
+      _$OnRecorderInfoUpdatedJsonFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OnRecorderInfoUpdatedJsonToJson(this);
+}

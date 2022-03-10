@@ -129,3 +129,44 @@ const _$AudioDeviceTestVolumeTypeEnumMap = {
   AudioDeviceTestVolumeType.AudioTestRecordingVolume: 0,
   AudioDeviceTestVolumeType.AudioTestPlaybackVolume: 1,
 };
+
+OnRecorderStateChangedJson _$OnRecorderStateChangedJsonFromJson(
+        Map<String, dynamic> json) =>
+    OnRecorderStateChangedJson(
+      $enumDecode(_$RecorderStateEnumMap, json['state']),
+      $enumDecode(_$RecorderErrorEnumMap, json['error']),
+    );
+
+Map<String, dynamic> _$OnRecorderStateChangedJsonToJson(
+        OnRecorderStateChangedJson instance) =>
+    <String, dynamic>{
+      'state': _$RecorderStateEnumMap[instance.state],
+      'error': _$RecorderErrorEnumMap[instance.error],
+    };
+
+const _$RecorderStateEnumMap = {
+  RecorderState.Error: -1,
+  RecorderState.Start: 2,
+  RecorderState.Stop: 3,
+};
+
+const _$RecorderErrorEnumMap = {
+  RecorderError.RECORDER_ERROR_NONE: 0,
+  RecorderError.RECORDER_ERROR_WRITE_FAILED: 1,
+  RecorderError.RECORDER_ERROR_NO_STREAM: 2,
+  RecorderError.RECORDER_ERROR_OVER_MAX_DURATION: 3,
+  RecorderError.RECORDER_ERROR_CONFIG_CHANGED: 4,
+  RecorderError.RECORDER_ERROR_CUSTOM_STREAM_DETECTED: 5,
+};
+
+OnRecorderInfoUpdatedJson _$OnRecorderInfoUpdatedJsonFromJson(
+        Map<String, dynamic> json) =>
+    OnRecorderInfoUpdatedJson(
+      RecorderInfo.fromJson(json['info'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$OnRecorderInfoUpdatedJsonToJson(
+        OnRecorderInfoUpdatedJson instance) =>
+    <String, dynamic>{
+      'info': instance.info,
+    };

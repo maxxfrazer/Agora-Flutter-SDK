@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:agora_rtc_engine/src/impl/api_types.dart';
 import 'package:agora_rtc_engine/src/classes.dart';
+import 'package:agora_rtc_engine/src/impl/media_recorder_impl.dart';
 import 'enum_converter.dart';
 import 'package:agora_rtc_engine/src/enums.dart';
 
@@ -17,7 +18,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 /// Implementation of [RtcEngine]
-class RtcEngineImpl implements RtcEngine {
+class RtcEngineImpl with MediaRecorderImplMixin implements RtcEngine {
   static const MethodChannel _methodChannel = MethodChannel('agora_rtc_engine');
   static const EventChannel _eventChannel =
       EventChannel('agora_rtc_engine/events');
@@ -167,9 +168,9 @@ class RtcEngineImpl implements RtcEngine {
       final subProcess = (eventMap['subProcess'] as bool?) ?? false;
       if (subProcess) {
         _instance?._screenShareHelper?._handler
-            ?.process(methodName, data, buffer);
+            ?.process(this, methodName, data, buffer);
       } else {
-        _instance?._handler?.process(methodName, data, buffer);
+        _instance?._handler?.process(this, methodName, data, buffer);
       }
     });
   }

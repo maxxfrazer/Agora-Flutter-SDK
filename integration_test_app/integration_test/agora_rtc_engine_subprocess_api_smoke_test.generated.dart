@@ -2931,7 +2931,7 @@ void rtcEngineSubProcessSmokeTestCases() {
   );
 
   testWidgets(
-    'setDefaultAudioRoutetoSpeakerphone',
+    'setDefaultAudioRouteToSpeakerphone',
     (WidgetTester tester) async {
       app.main();
       await tester.pumpAndSettle();

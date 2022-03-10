@@ -181,7 +181,7 @@ typedef RemoteAudioMixingBegin = void Function();
 typedef RemoteAudioMixingEnd = void Function();
 
 typedef RecorderStateChangedCallback = void Function(
-    RecorderState state, RecorderError error);
+    RecorderState state, RecorderErrorCode error);
 
 typedef SnapshotTakenCallback = void Function(String channel, int uid,
     String filePath, int width, int height, int errCode);
@@ -202,3 +202,8 @@ typedef OnProxyConnected = void Function(String channel, int uid,
 
 typedef OnAudioDeviceTestVolumeIndication = void Function(
     AudioDeviceTestVolumeType volumeType, int volume);
+
+typedef OnRecorderStateChanged = void Function(
+    RecorderState state, RecorderErrorCode error);
+
+typedef OnRecorderInfoUpdated = void Function(RecorderInfo info);

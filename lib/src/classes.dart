@@ -2345,20 +2345,20 @@ class Metadata {
 /* class-MediaRecorderConfiguration */
 @JsonSerializable(explicitToJson: true)
 class MediaRecorderConfiguration {
-  String storagePath;
-  AgoraMediaRecorderContainerFormat containerFormat;
-  AgoraMediaRecorderStreamType streamType;
-  int maxDurationMs;
-  int recorderInfoUpdateInterval;
+  final String? storagePath;
+  final MediaRecorderContainerFormat containerFormat;
+  final MediaRecorderStreamType streamType;
+  final int maxDurationMs;
+  final int recorderInfoUpdateInterval;
 
   /// Constructs a [MediaRecorderConfiguration]
-  MediaRecorderConfiguration(
+  MediaRecorderConfiguration({
     this.storagePath,
-    this.containerFormat,
-    this.streamType,
-    this.maxDurationMs,
-    this.recorderInfoUpdateInterval,
-  );
+    this.containerFormat = MediaRecorderContainerFormat.MP4,
+    this.streamType = MediaRecorderStreamType.Both,
+    this.maxDurationMs = 120000,
+    this.recorderInfoUpdateInterval = 0,
+  });
 
   /// @nodoc
   factory MediaRecorderConfiguration.fromJson(Map<String, dynamic> json) =>
@@ -2371,9 +2371,9 @@ class MediaRecorderConfiguration {
 /* class-RecorderInfo */
 @JsonSerializable(explicitToJson: true)
 class RecorderInfo {
-  String fileName;
-  int durationMs;
-  int fileSize;
+  final String fileName;
+  final int durationMs;
+  final int fileSize;
 
   /// Constructs a [RecorderInfo]
   RecorderInfo(this.fileName, this.durationMs, this.fileSize);

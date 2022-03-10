@@ -4108,34 +4108,37 @@ enum RecorderState {
 }
 
 /* enum-RecorderError */
-enum RecorderError {
+enum RecorderErrorCode {
   @JsonValue(0)
-  RECORDER_ERROR_NONE,
+  None,
 
   @JsonValue(1)
-  RECORDER_ERROR_WRITE_FAILED,
+  WriteFailed,
 
   @JsonValue(2)
-  RECORDER_ERROR_NO_STREAM,
+  NoStream,
 
   @JsonValue(3)
-  RECORDER_ERROR_OVER_MAX_DURATION,
+  OverMaxDuration,
 
   @JsonValue(4)
-  RECORDER_ERROR_CONFIG_CHANGED,
+  ConfigChanged,
 
   @JsonValue(5)
-  RECORDER_ERROR_CUSTOM_STREAM_DETECTED,
+  CustomStreamDetected,
 }
 
 /* enum-AgoraMediaRecorderContainerFormat */
-enum AgoraMediaRecorderContainerFormat {
+enum MediaRecorderContainerFormat {
   @JsonValue(1)
   MP4,
+
+  @JsonValue(2)
+  FLV,
 }
 
 /* enum-AgoraMediaRecorderStreamType */
-enum AgoraMediaRecorderStreamType {
+enum MediaRecorderStreamType {
   @JsonValue(1)
   Audio,
 

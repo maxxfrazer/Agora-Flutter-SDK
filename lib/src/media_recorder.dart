@@ -1,12 +1,10 @@
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/src/classes.dart';
+import 'package:agora_rtc_engine/src/impl/media_recorder_impl.dart';
 
-typedef OnRecorderStateChanged = void Function(
-    RecorderState state, RecorderError error);
-
-typedef OnRecorderInfoUpdated = void Function(RecorderInfo info);
-
+///
 class MediaRecorderObserver {
+  ///
   MediaRecorderObserver({
     this.onRecorderStateChanged,
     this.onRecorderInfoUpdated,
@@ -60,10 +58,10 @@ abstract class MediaRecorder {
   /// Returns
   ///
   /// The AgoraMediaRecorder object.
-  MediaRecorder getMediaRecorder(
-    RtcEngine engine,
-    MediaRecorderObserver callback,
-  );
+  static MediaRecorder getMediaRecorder(RtcEngine engine,
+      {MediaRecorderObserver? callback}) {
+    return MediaRecorderImpl.getMediaRecorder(engine, callback: callback);
+  }
 
   /// Starts recording the local audio and video.
   ///
