@@ -162,6 +162,13 @@ class Clazz extends BaseNode {
   List<Field> fields = [];
 }
 
+class Extensionz extends BaseNode {
+  late String name;
+  late String extendedType;
+  List<Method> methods = [];
+  List<Field> fields = [];
+}
+
 class EnumConstant extends BaseNode {
   late String name;
   List<SimpleAnnotation> annotations = [];
@@ -175,6 +182,7 @@ class Enumz extends BaseNode {
 class ParseResult {
   late Map<String, Clazz> classMap;
   late Map<String, Enumz> enumMap;
+  late Map<String, Extensionz> extensionMap;
 
   // TODO(littlegnal): Optimize this later.
   // late Map<String, List<String>> classFieldsMap;
@@ -189,6 +197,7 @@ class DefaultVisitor extends dart_ast_visitor.RecursiveAstVisitor<Object?> {
 
   final classMap = <String, Clazz>{};
   final enumMap = <String, Enumz>{};
+  final extensionMap = <String, Extensionz>{};
 
   @override
   Object? visitFieldDeclaration(dart_ast.FieldDeclaration node) {
@@ -236,7 +245,8 @@ class DefaultVisitor extends dart_ast_visitor.RecursiveAstVisitor<Object?> {
       ..name = node.name?.name ?? ''
       ..parameters = _getParameter(node.parent, node.parameters)
       ..isFactory = node.factoryKeyword != null
-      ..comment = _generateComment(node);
+      ..comment = _generateComment(node)
+      ..source = node.toSource();
 
     clazz.constructors.add(constructor);
 
@@ -473,9 +483,15 @@ class DefaultVisitor extends dart_ast_visitor.RecursiveAstVisitor<Object?> {
       classNode.name.name,
       () => Clazz()..name = classNode.name.name,
     );
+    clazz.methods.add(_createMethod(node));
 
-    Method method = Method()..name = node.name.name..source = node.toString();
-    clazz.methods.add(method);
+    return null;
+  }
+
+  Method _createMethod(MethodDeclaration node) {
+    Method method = Method()
+      ..name = node.name.name
+      ..source = node.toString();
 
     method.comment = _generateComment(node);
 
@@ -515,7 +531,8 @@ class DefaultVisitor extends dart_ast_visitor.RecursiveAstVisitor<Object?> {
         }
       }
     }
-    return null;
+
+    return method;
   }
 
   @override
@@ -540,6 +557,29 @@ class DefaultVisitor extends dart_ast_visitor.RecursiveAstVisitor<Object?> {
 
     return null;
   }
+
+  @override
+  Object? visitExtensionDeclaration(dart_ast.ExtensionDeclaration node) {
+    stdout.writeln(
+        'root visitExtensionDeclaration: node.name: ${node.name}, node.members: ${node.members.map((e) => e.runtimeType.toString()).toList()}');
+
+    extensionMap.putIfAbsent(node.name?.name ?? '', () {
+      Extensionz extensionz = Extensionz()..name = node.name?.name ?? '';
+      if (node.extendedType is dart_ast.NamedType) {
+        extensionz.extendedType =
+            (node.extendedType as dart_ast.NamedType).name.name;
+      }
+      for (final member in node.members) {
+        if (member is MethodDeclaration) {
+          extensionz.methods.add(_createMethod(member));
+        }
+      }
+
+      return extensionz;
+    });
+
+    return null;
+  }
 }
 
 class Paraphrase {
@@ -555,6 +595,7 @@ class Paraphrase {
     final parseResult = ParseResult()
       ..classMap = rootBuilder.classMap
       ..enumMap = rootBuilder.enumMap
+      ..extensionMap = rootBuilder.extensionMap
       ..genericTypeAliasParametersMap =
           rootBuilder.genericTypeAliasParametersMap;
 
