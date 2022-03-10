@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'dart:ui' show Color;
 
 import 'package:json_annotation/json_annotation.dart';
 
@@ -7,17 +6,6 @@ import 'enums.dart';
 import 'impl/enum_converter.dart';
 
 part 'classes.g.dart';
-
-Color _$ColorFromJson(Map<String, dynamic> json) => Color.fromRGBO(
-    json['red'] as int, json['green'] as int, json['blue'] as int, 1.0);
-
-Map<String, dynamic>? _$ColorToJson(Color? instance) => instance != null
-    ? <String, dynamic>{
-        'red': instance.red,
-        'green': instance.green,
-        'blue': instance.blue,
-      }
-    : null;
 
 ///
 /// The information of the user.
@@ -486,7 +474,6 @@ class LiveTranscoding {
   /// The video background color of the output media stream. The format is a hexadecimal integer defined by RGB without the # symbol. For example, 0xFFB6C1
   /// means light pink. The default value is 0x000000 (black).
   ///
-  // TODO(littlegnal): Doc break change backgroundColor type from Color -> int
   @JsonKey(includeIfNull: false)
   int? backgroundColor;
 
@@ -2098,13 +2085,12 @@ class VirtualBackgroundSource {
   ///
   VirtualBackgroundSourceType? backgroundSourceType;
 
-  @JsonKey(
-      includeIfNull: false, fromJson: _$ColorFromJson, toJson: _$ColorToJson)
+  @JsonKey(includeIfNull: false)
 
   ///
   /// The type of the custom background image. The color of the custom background image. The format is a hexadecimal integer defined by RGB, without the # sign, such as 0xFFB6C1 for light pink.The default value is 0xFFFFFF, which signifies white.  The value range is [0x000000, 0xffffff]. If the value is invalid, the SDK replaces the original background image with a white background image.This parameter takes effect only when the type of the custom background image is Color.
   ///
-  Color? color;
+  int? color;
 
   @JsonKey(includeIfNull: false)
 
