@@ -53,7 +53,7 @@ class _SetEncryptionState extends State<SetEncryption> {
 
   @override
   void dispose() {
-    _controller?.dispose();
+    _controller.dispose();
     _encryptionKey.dispose();
     _encryptionKdfSalt.dispose();
     _destroy();
