@@ -127,6 +127,8 @@ testWidgets('{{TEST_CASE_NAME}}', (WidgetTester tester) async {
 ''';
 
     const testCasesContentTemplate = '''
+$defaultHeader
+
 import 'dart:io';
 
 import 'package:agora_rtc_engine/rtc_engine.dart';

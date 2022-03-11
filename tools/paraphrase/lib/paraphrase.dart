@@ -1,24 +1,15 @@
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:analyzer/dart/analysis/analysis_context.dart';
-import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/element/type.dart';
-import 'package:analyzer/dart/element/type_visitor.dart';
-import 'package:path/path.dart' as path;
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart'
     show AnalysisContextCollection;
-import 'dart:convert';
-import 'dart:io';
-import 'package:file/file.dart' as file;
-
 import 'package:analyzer/dart/analysis/results.dart' show ParsedUnitResult;
 import 'package:analyzer/dart/analysis/session.dart' show AnalysisSession;
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/ast.dart' as dart_ast;
-import 'package:analyzer/dart/ast/syntactic_entity.dart'
-    as dart_ast_syntactic_entity;
 import 'package:analyzer/dart/ast/visitor.dart' as dart_ast_visitor;
+import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/error/error.dart' show AnalysisError;
-import 'package:file/local.dart';
 
 class CallApiInvoke {
   late String apiType;
@@ -153,6 +144,7 @@ class Constructor extends BaseNode {
   late String name;
   List<Parameter> parameters = [];
   late bool isFactory;
+  late bool isConst;
 }
 
 class Clazz extends BaseNode {
@@ -245,6 +237,7 @@ class DefaultVisitor extends dart_ast_visitor.RecursiveAstVisitor<Object?> {
       ..name = node.name?.name ?? ''
       ..parameters = _getParameter(node.parent, node.parameters)
       ..isFactory = node.factoryKeyword != null
+      ..isConst = node.constKeyword != null
       ..comment = _generateComment(node)
       ..source = node.toSource();
 
@@ -301,6 +294,12 @@ class DefaultVisitor extends dart_ast_visitor.RecursiveAstVisitor<Object?> {
           } else if (a is BinaryExpression) {
             type = 'int';
             value = a.toSource();
+          } else if (a is SimpleStringLiteral) {
+            type = 'String';
+            value = a.toSource();
+          } else {
+            stderr
+                .writeln('Not handled enum annotation type: ${a.runtimeType}');
           }
           simpleLiteral.type = type;
           simpleLiteral.value = value;
@@ -519,7 +518,7 @@ class DefaultVisitor extends dart_ast_visitor.RecursiveAstVisitor<Object?> {
 
       for (final statement in body.block.statements) {
         if (statement is ReturnStatement) {
-          final returns = statement as ReturnStatement;
+          final returns = statement;
 
           if (returns.expression != null) {
             CallApiInvoke? callApiInvoke =

@@ -5,6 +5,8 @@ import 'package:paraphrase/paraphrase.dart';
 import 'package:path/path.dart' as path;
 import 'package:testcase_gen/generator.dart';
 
+import 'default_generator.dart';
+
 class RtcEngineEventHandlerSomkeTestGenerator implements Generator {
   const RtcEngineEventHandlerSomkeTestGenerator();
 
@@ -20,7 +22,7 @@ class RtcEngineEventHandlerSomkeTestGenerator implements Generator {
 
   static const Map<String, List<GeneratorConfigPlatform>> _restrictPlatforms = {
     'onFacePositionChanged': mobilePlatforms,
-    'onScreenCaptureInfoUpdated': [GeneratorConfigPlatform.Windows],
+    'onScreenCaptureInfoUpdated': [GeneratorConfigPlatform.windows],
   };
 
   @override
@@ -96,6 +98,8 @@ expect(${field.name}Called, isTrue);
     }
 
     const testCasesContentTemplate = '''
+$defaultHeader
+
 import 'dart:io';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';

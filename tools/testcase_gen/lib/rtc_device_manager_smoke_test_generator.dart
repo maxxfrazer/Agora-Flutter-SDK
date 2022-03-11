@@ -44,6 +44,8 @@ testWidgets('{{TEST_CASE_NAME}}', (WidgetTester tester) async {
 ''';
 
     const testCasesContentTemplate = '''
+$defaultHeader
+
 import 'dart:io';
 
 import 'package:flutter/services.dart';

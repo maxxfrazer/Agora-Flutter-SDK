@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dart_style/dart_style.dart';
 import 'package:paraphrase/paraphrase.dart';
-import 'package:path/path.dart' as path;
+import 'package:testcase_gen/default_generator.dart';
 import 'package:testcase_gen/generator.dart';
 
 class MediaRecorderObserverSomkeTestGenerator implements Generator {
@@ -72,6 +72,8 @@ expect(${field.name}Called, isTrue);
     }
 
     const testCasesContentTemplate = '''
+$defaultHeader
+
 import 'package:agora_rtc_engine/rtc_channel.dart';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -5,6 +5,8 @@ import 'package:paraphrase/paraphrase.dart';
 import 'package:path/path.dart' as path;
 import 'package:testcase_gen/generator.dart';
 
+import 'default_generator.dart';
+
 class RtcChannelEventHandlerSomkeTestGenerator implements Generator {
   const RtcChannelEventHandlerSomkeTestGenerator();
 
@@ -82,6 +84,8 @@ expect(${field.name}Called, isTrue);
     }
 
     const testCasesContentTemplate = '''
+$defaultHeader
+
 import 'package:agora_rtc_engine/rtc_channel.dart';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
